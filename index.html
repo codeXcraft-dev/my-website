@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My First Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <header>
+      <h1>My First Website</h1>
+      <p>Welcome to my personal webpage!</p>
+      <button class="btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </header>
+
+   <nav>
+  <a href="index.html">Home</a> |
+  <a href="projects.html">Projects</a> |
+  <a href="#about">About Me</a> |
+  <a href="#hobbies">My Hobbies</a> |
+  <a href="#gallery">Gallery</a> |
+  <a href="#contact">Contact</a>
+</nav>
+
+    <main>
+
+      <section id="about">
+        <h2>About Me</h2>
+        <p id="about-text">Hi! My name is Bellefu Official. I am learning web development and this is my first website!</p>
+        <button class="btn" onclick="changeGreeting()">Click Me!</button>
+      </section>
+
+      <section id="hobbies">
+        <h2>My Hobbies</h2>
+        <ul>
+          <li>Coding</li>
+          <li>Music</li>
+          <li>Football</li>
+        </ul>
+      </section>
+
+      <section id="gallery">
+        <h2>Gallery</h2>
+        <img src="https://placecats.com/300/200" alt="A cute cat">
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>You can find me on YouTube</p>
+        <a href="https://www.youtube.com" class="btn">Visit YouTube</a>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>© 2026 My First Website. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript goes here, inside the HTML file -->
+    <script>
+      function changeGreeting() {
+        let text = document.getElementById("about-text");
+        text.innerHTML = "🎉 You just used JavaScript! I am Bellefu Official and I am going to be a web developer!";
+        text.style.color = "#f39c12";
+      }
+
+      function toggleDarkMode() {
+        let body = document.body;
+        body.classList.toggle("dark");
+
+        let btn = document.querySelector("header .btn");
+        if (body.classList.contains("dark")) {
+          btn.innerHTML = "☀️ Light Mode";
+        } else {
+          btn.innerHTML = "🌙 Dark Mode";
+        }
+      }
+    </script>
+
+  </body>
+</html>

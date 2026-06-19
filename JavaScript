@@ -1,0 +1,29 @@
+// This function runs when the button is clicked
+function changeGreeting() {
+  
+  // Find the paragraph with id "about-text"
+  let text = document.getElementById("about-text");
+  
+  // Change its text
+  text.innerHTML = "🎉 You just used JavaScript! I am Bellefu Official and I am going to be a web developer!";
+  
+  // Change its color
+  text.style.color = "#f39c12";
+// Dark mode toggle
+function changeGreeting() {
+  let text = document.getElementById("about-text");
+  text.innerHTML = "🎉 You just used JavaScript! I am Bellefu Official and I am going to be a web developer!";
+  text.style.color = "#f39c12";
+}
+
+function toggleDarkMode() {
+  let body = document.body;
+  body.classList.toggle("dark");
+
+  let btn = document.querySelector("header .btn");
+  if (body.classList.contains("dark")) {
+    btn.innerHTML = "☀️ Light Mode";
+  } else {
+    btn.innerHTML = "🌙 Dark Mode";
+  }
+}
