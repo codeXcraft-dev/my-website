@@ -7,30 +7,36 @@
   </head>
   <body>
 
-    <header>
-      <h1>My First Website</h1>
-      <p>Welcome to my personal webpage!</p>
-      <button class="btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-    </header>
+   <header>
+  <h1>My First Website</h1>
+  <p id="typing-text"></p>
+  <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+    <button class="btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    <a href="portfolio.html" class="btn" style="background-color:#2c3e50; border: 2px solid #f39c12;">💼 View Portfolio</a>
+  </div>
+</header>
 
-   <nav>
+  <nav>
   <a href="index.html">Home</a> |
   <a href="projects.html">Projects</a> |
+  <a href="portfolio.html">Portfolio</a> |
   <a href="#about">About Me</a> |
   <a href="#hobbies">My Hobbies</a> |
   <a href="#gallery">Gallery</a> |
+  <a href="#testimonials">Reviews</a> |
   <a href="#contact">Contact</a>
+</nav>
 </nav>
 
     <main>
 
-      <section id="about">
+      <section id="about" class="fade-in">
         <h2>About Me</h2>
         <p id="about-text">Hi! My name is Bellefu Official. I am learning web development and this is my first website!</p>
         <button class="btn" onclick="changeGreeting()">Click Me!</button>
       </section>
 
-      <section id="hobbies">
+      <section id="hobbies" class="fade-in">
         <h2>My Hobbies</h2>
         <ul>
           <li>Coding</li>
@@ -39,24 +45,79 @@
         </ul>
       </section>
 
-      <section id="gallery">
+      <section id="gallery" class="fade-in">
         <h2>Gallery</h2>
         <img src="https://placecats.com/300/200" alt="A cute cat">
       </section>
 
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>You can find me on YouTube</p>
-        <a href="https://www.youtube.com" class="btn">Visit YouTube</a>
+      <section id="contact" class="fade-in">
+        <h2>Contact Me</h2>
+        <p>Have a question or want to work together? Send me a message!</p>
+
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="name" placeholder="Enter your name">
+        </div>
+
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" id="email" placeholder="Enter your email">
+        </div>
+
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea id="message" placeholder="Write your message here..." rows="5"></textarea>
+        </div>
+
+        <button class="btn" onclick="submitForm()">Send Message 📨</button>
+        <p id="form-response"></p>
+
       </section>
 
     </main>
+    <!-- TESTIMONIALS SECTION -->
+      <section id="testimonials" class="fade-in">
+        <h2>What People Say</h2>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Bellefu is an incredibly fast learner. In just a few days he went from zero to building a fully functional website. Very impressive!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👨‍💼</div>
+            <div>
+              <strong>John Smith</strong>
+              <p>Web Developer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"I was amazed by the website Bellefu built. It looks professional, works on mobile, and even has dark mode. Can't wait to see what he builds next!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👩‍💻</div>
+            <div>
+              <strong>Sarah Johnson</strong>
+              <p>UI Designer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Highly recommend Bellefu! He is passionate, dedicated and picks up new skills incredibly fast. A future star in web development!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👨‍🏫</div>
+            <div>
+              <strong>Michael Brown</strong>
+              <p>Tech Mentor</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
 
     <footer>
       <p>© 2026 My First Website. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript goes here, inside the HTML file -->
     <script>
       function changeGreeting() {
         let text = document.getElementById("about-text");
@@ -67,7 +128,6 @@
       function toggleDarkMode() {
         let body = document.body;
         body.classList.toggle("dark");
-
         let btn = document.querySelector("header .btn");
         if (body.classList.contains("dark")) {
           btn.innerHTML = "☀️ Light Mode";
@@ -75,6 +135,87 @@
           btn.innerHTML = "🌙 Dark Mode";
         }
       }
+
+      function revealSections() {
+        let sections = document.querySelectorAll(".fade-in");
+        sections.forEach(function(section) {
+          let position = section.getBoundingClientRect().top;
+          let screenHeight = window.innerHeight;
+          if (position < screenHeight - 100) {
+            section.classList.add("visible");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", revealSections);
+      revealSections();
+
+      function submitForm() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let message = document.getElementById("message").value;
+
+        if (name === "" || email === "" || message === "") {
+          document.getElementById("form-response").innerHTML = "❌ Please fill in all fields!";
+          document.getElementById("form-response").style.color = "red";
+          return;
+        }
+
+        document.getElementById("form-response").innerHTML =
+          "✅ Thank you " + name + "! Your message has been received!";
+        document.getElementById("form-response").style.color = "#27ae60";
+
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("message").value = "";
+      }
+      // Typing effect
+const phrases = [
+  "Welcome to my personal webpage! 👋",
+  "I am learning web development 💻",
+  "I am going to be a web developer! 🚀",
+  "I build beautiful websites 🌍",
+];
+
+let phraseIndex = 0;
+let letterIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+  let currentPhrase = phrases[phraseIndex];
+  let typingElement = document.getElementById("typing-text");
+
+  if (!isDeleting) {
+    // Type the next letter
+    typingElement.innerHTML = currentPhrase.slice(0, letterIndex + 1) + '<span class="cursor">|</span>';
+    letterIndex++;
+
+    // If full phrase is typed, start deleting after a pause
+    if (letterIndex === currentPhrase.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 2000);
+      return;
+    }
+  } else {
+    // Delete the last letter
+    typingElement.innerHTML = currentPhrase.slice(0, letterIndex - 1) + '<span class="cursor">|</span>';
+    letterIndex--;
+
+    // If fully deleted, move to next phrase
+    if (letterIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+    }
+  }
+
+  // Speed: typing is slower than deleting
+  let speed = isDeleting ? 50 : 100;
+  setTimeout(typeEffect, speed);
+}
+
+// Start the typing effect
+typeEffect();
+
     </script>
 
   </body>
